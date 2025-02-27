@@ -5,7 +5,7 @@ type tree = Empty | Node of tree * int * tree
 let rec isSame (t1, t2) : bool = 
   match (t1, t2) with
   | (Empty, Empty) -> true
-  | (Node (tl1, a, tr1), Node (tl2, b, tr2)) -> isSame (tl1, tl2) && isSame(tr1, tr2)
+  | (Node (tl1, a, tr1), Node (tl2, b, tr2)) -> isSame (tl1, tr2) && isSame(tr1, tl2)
   | _ -> false
   
 
