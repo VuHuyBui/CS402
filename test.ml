@@ -24,4 +24,3 @@ let rec toList (xs:myList) : int list =
   match xs with
   | Nil -> []
   | Cons (x, xs') -> x::toList xs'
-
