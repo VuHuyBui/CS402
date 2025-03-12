@@ -42,8 +42,8 @@ let match_exp acc a =
   | (_::[], _) |([], _) -> raise InvalidExpression
   | (x::y::acc', Multiply) -> (x * y)::acc'
   | (x::y::acc', Add) -> (x + y)::acc'
-  | (x::y::acc', Subtract) -> (x - y)::acc'
-  | (x::y::acc', Divide) -> (x / y)::acc'
+  | (x::y::acc', Subtract) -> (y - x)::acc'
+  | (x::y::acc', Divide) -> (y / x)::acc'
 
 (* 
  * eval : token list -> int list

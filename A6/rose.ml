@@ -39,7 +39,7 @@ let roseFilter p r =
     fun acc x -> 
       match acc with
       | None -> if p x then Some (Rose (x, [])) else None
-      | Some Rose(a, xs) -> if p x then Some (Rose (a, xs @ [Rose (x, [])])) else acc
+      | Some Rose(a, xs) -> if p x then Some (Rose (a, xs @ [Rose (x, [])]  )) else acc
   ) 
   None 
   r
