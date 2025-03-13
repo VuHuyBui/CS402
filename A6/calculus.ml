@@ -31,4 +31,6 @@ let differentiate (p: poly) x =
  * Alternatively, you could say that differentiate (( integrate p ) c ) ~= p for all c : float. 
  *)
 let integrate (p: poly) (c: float) (d: int) =
-  p (d - 1) /. float_of_int (d)
+  match d with 
+  | 0 -> c
+  | _ -> p (d - 1) /. float_of_int (d)
