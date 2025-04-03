@@ -9,6 +9,5 @@ sig
   val insert: ('a * 'a -> order) -> 'a tree -> 'a -> 'a tree
   val remove: ('a * 'a -> order) -> 'a tree -> 'a -> 'a tree
   val isIn: ('a * 'a -> order) -> 'a tree -> 'a -> bool
-  val find: ('a * 'a -> order) -> 'a tree -> 'a -> 'a tree
   val findRoot: 'a tree -> 'a
 end

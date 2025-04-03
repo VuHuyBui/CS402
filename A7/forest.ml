@@ -6,7 +6,6 @@ module type FOREST =
   
     exception Full
     exception NotInForest
-    exception Empty
   
     val limit: int
     val empty: unit -> 'a forest
