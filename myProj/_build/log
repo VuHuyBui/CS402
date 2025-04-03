@@ -1,0 +1,6 @@
+# dune init project myProj
+# OCAMLPARAM: unset
+# Shared cache: enabled-except-user-rules
+# Shared cache location: /home/vubh/.cache/dune/db
+# Workspace root: /home/vubh/cs402/myProj
+# Auto-detected concurrency: 8

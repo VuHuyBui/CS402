@@ -1,4 +1,37 @@
-module MkForest (T : Tree.TREE) (L : sig val lim : int end) : Forest.FOREST =
+module type TREE = 
+sig
+  type order = Less | Equal | Greater
+  type 'a tree
+
+  exception NotFound
+
+  val empty: unit -> 'a tree
+  val insert: ('a * 'a -> order) -> 'a tree -> 'a -> 'a tree
+  val remove: ('a * 'a -> order) -> 'a tree -> 'a -> 'a tree
+  val isIn: ('a * 'a -> order) -> 'a tree -> 'a -> bool
+  val find: ('a * 'a -> order) -> 'a tree -> 'a -> 'a tree
+  val findRoot: 'a tree -> 'a
+end
+
+module type FOREST =
+  sig
+    module T: TREE
+    type 'a forest
+
+  
+    exception Full
+    exception NotInForest
+    exception Empty
+  
+    val limit: int
+    val empty: unit -> 'a forest
+    val addToForest: 'a forest -> 'a T.tree -> 'a forest
+    val addToTree: ('a * 'a -> T.order) -> 'a forest -> 'a -> 'a -> 'a forest
+    val findRoot: ('a * 'a -> T.order) -> 'a forest -> 'a -> 'a
+    val removeTree: ('a * 'a -> T.order) -> 'a forest -> 'a -> 'a forest
+  end
+
+module MkForest (T : TREE) (L : sig val lim : int end) : FOREST =
 struct
 
   type 'a forest = 'a T.tree list * int 

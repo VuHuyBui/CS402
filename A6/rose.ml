@@ -24,7 +24,7 @@ let rec roseFoldLeft f z (Rose (x, rs)) =
  * ENSURES: roseFoldRight f r ~= List.fold_right f z ( rosePreord r )
  *)
  let rec roseFoldRight f (Rose (x, rs)) z =
-  List.fold_right (roseFoldRight f) rs (f x z)  
+  let acc = List.fold_right (roseFoldRight f) rs z in f x acc
 
 
 (*

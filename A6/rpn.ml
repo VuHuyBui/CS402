@@ -35,7 +35,7 @@ let (%) ( f : 'a -> 'b ) ( g : 'c -> 'a ) ( x : 'c ) : 'b = f ( g x )
     |> List.map tokenize
 
 
-let match_exp acc a = 
+let match_exp = fun acc a ->
   match (acc, a) with
   | (_, Integer x) -> x::acc
   | (acc, SumAll) -> [List.fold_left (+) 0 acc] 
@@ -53,7 +53,7 @@ let match_exp acc a =
  * exception if the input's indicated computation would divide by 0. If tokens is not a valid
  * list of tokens, eval tokens raises an InvalidExpression exception.
  *)
-let eval tokens = 
+let eval = fun tokens ->
   tokens
   |> List.fold_left match_exp []
 
@@ -65,7 +65,7 @@ let eval tokens =
  * Division_by_zero exception if the input's indicated computation would divide by 0.
  * If s is not a valid RPN expression, rpn s raises an InvalidExpression exception
  *)
-let rpn s = 
+let rpn = fun s -> 
   s 
   |> parse 
   |> eval
