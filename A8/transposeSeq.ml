@@ -1,4 +1,3 @@
-
 module type TRANSPOSESEQ = sig 
 
   include Sequence.SEQUENCE
@@ -18,8 +17,13 @@ module MkTranspose (S : Sequence.SEQUENCE) : TRANSPOSESEQ = struct
 
   (* YOUR CODE GOES BELOW THIS LINE *)
 
-  let transpose = failwith "TODO"
-
+  let rec transpose s = 
+    if null s then empty ()
+    else
+    let row, col = length s, length (nth s 0) in 
+    tabulate (fun i ->
+      tabulate (fun j -> nth (nth s j) i) row
+    ) col
   (* YOUR CODE GOES ABOVE THIS LINE *)
 
 end

@@ -14,7 +14,7 @@ module MkExists (S : Sequence.SEQUENCE) : EXISTSSEQ = struct
 
   (* YOUR CODE GOES BELOW THIS LINE *)
 
-  let exists = failwith "TODO"
+  let exists p s = mapreduce p false (fun (x, y) -> x || y) s
 
   (* YOUR CODE GOES ABOVE THIS LINE *)
   
