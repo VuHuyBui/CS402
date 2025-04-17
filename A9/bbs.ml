@@ -8,4 +8,4 @@
  * modulus m and seed s. The first element in the stream is x1 as defined above. 
  *)
 
-let bbs m s = Seq.iterate (fun x -> x*x mod m) s
+let bbs m s: int Seq.t = Seq.iterate (fun x -> x*x mod m) s

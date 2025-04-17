@@ -28,3 +28,17 @@ module Binom: BINOM = struct
       | _ -> if n < k then 0 else  binom (n - 1) k + binom (n - 1) (k - 1)
       )
 end
+
+let rev (a: 'a array) = 
+  let n = (Array.length a) in
+  for i = 0 to n / 2 - 1  do
+    let temp = a.(i) in
+    a.(i) <- a.(n - 1 - i);
+    a.(n - 1 - i) <- temp;
+  done
+
+let map f a = 
+  let n = (Array.length a) in
+  for i = 0 to n - 1 do
+    a.(i) <- f a.(i)
+  done
