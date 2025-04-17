@@ -8,4 +8,5 @@
  * modulus m and seed s. The first element in the stream is x1 as defined above. 
  *)
 
-let bbs m s: int Seq.t = Seq.iterate (fun x -> x*x mod m) s
+ let rec bbs (m: int) (s: int) : int Seq.t = 
+  fun () -> Seq.Cons(s, bbs m (((s) * (s)) mod m))
