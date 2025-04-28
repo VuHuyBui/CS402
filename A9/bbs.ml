@@ -9,4 +9,4 @@
  *)
 
  let rec bbs (m: int) (s: int) : int Seq.t = 
-  fun () -> Seq.Cons(s, bbs m (((s) * (s)) mod m))
+  fun () -> Seq.Cons((s * s) mod m, bbs m ((s * s) mod m)) 

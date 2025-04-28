@@ -36,7 +36,8 @@ let rec map f t () =
  *   - tabulate f g x is maximally lazy (evaluating tabulate f g x never calls
  *     neither f nor g and never exposes any elements of the tree)
  *)
-let rec tabulate f g x () = Node (tabulate f g (f x), x, tabulate f g (g x))
+ let rec tabulate f g x () =
+  Node ((fun () -> tabulate f g (f x) ()), x, (fun () -> tabulate f g (g x) ()))
 
 (*
  * preOrd : 'a lazyTree -> 'a Seq.t

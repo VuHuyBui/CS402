@@ -14,7 +14,7 @@ let rec concat s () =
     begin
       match x () with
       | Seq.Nil -> concat s' ()
-      | Seq.Cons (y, ys) -> Seq.Cons(y, concat (fun () -> Seq.Cons(ys, s')))
+      | Seq.Cons (y, ys) -> Seq.Cons(y, fun () -> concat (fun () -> Seq.Cons(ys, s')) ())
     end
 
 
@@ -52,7 +52,7 @@ let rec interleave s1 s2 () =
   match s1 (), s2 () with
   | Seq.Nil, _ -> s2 ()
   | _, Seq.Nil -> s1 ()
-  | Seq.Cons(x1, xs1),  Seq.Cons(x2, xs2) -> Seq.Cons(x1, fun () -> Seq.Cons(x2, interleave xs1 xs2))
+  | Seq.Cons(x1, xs1),  Seq.Cons(x2, xs2) -> Seq.Cons(x1, fun () -> Seq.Cons(x2, fun () -> interleave xs1 xs2 ()))
 
 
 (*
@@ -71,5 +71,5 @@ let rec interleave s1 s2 () =
 let rec double s () = 
   match s () with
   | Seq.Nil -> Seq.Nil
-  | Seq.Cons (x, xs) -> Seq.Cons(x, fun () -> Seq.Cons(x, double xs))
+  | Seq.Cons (x, xs) -> Seq.Cons(x, fun () -> Seq.Cons(x, fun () -> double xs ()))
 
