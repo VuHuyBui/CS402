@@ -83,7 +83,11 @@ let rec catalanNaive n =
 let rec binomNaive (n, k) = 
   if k > n then 0
   else if k = 0 then 1
-  else binomNaive (n - 1, k) + binomNaive (n - 1, k - 1)
+  else (
+    tick(); let left = binomNaive (n - 1, k) in
+    tick(); let right = binomNaive (n - 1, k - 1) in
+    left + right
+  )
 
 (* bellNaive : int -> int
  * REQUIRES: n >= 0
@@ -97,7 +101,7 @@ match n with
 | _ -> 
   let res = List.init n (fun i -> i)
   |> List.map (fun x -> 
-      tick(); let bin = binomNaive (n - 1, x) in
+      let bin = binomNaive (n - 1, x) in
       tick(); let bel = bellNaive x in
       bin * bel)
   |> List.fold_left (+) 0
