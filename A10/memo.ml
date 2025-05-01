@@ -63,7 +63,7 @@ let reset () = counter := 0
 
 (* catalanNaive : int -> int
  * REQUIRES: n >= 0
- * ENSURES: catalanNaive n |-*-> the nth Catalan numb;;er and calls tick once before
+ * ENSURES: catalanNaive n |-*-> the nth Catalan number and calls tick once before
  * every recursive call to catalanNaive.
  *)
 let rec catalanNaive n = 
@@ -83,11 +83,7 @@ let rec catalanNaive n =
 let rec binomNaive (n, k) = 
   if k > n then 0
   else if k = 0 then 1
-  else (
-    tick(); let left = binomNaive (n - 1, k) in
-    tick(); let right = binomNaive (n - 1, k - 1) in
-    left + right
-  )
+  else binomNaive (n - 1, k) + binomNaive (n - 1, k - 1)
 
 (* bellNaive : int -> int
  * REQUIRES: n >= 0
