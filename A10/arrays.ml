@@ -6,11 +6,10 @@
  * ENSURES: monotonize cmp a mutates a so that, if ever it would be the case that cmp a .(i) a .(i + 1) |-*-> false, 
  * instead a.(i + 1) is mutated to be equal to a .(i)
  *)
-let monotonize cmp a = 
-  let n = Array.length a in
-  for i = 0 to n - 2 do 
-    if not (cmp a.(i) a.(i + 1))
-      then a.(i + 1) <- a.(i)
+ let monotonize (cmp: 'a -> 'a -> bool) (a: 'a array) : unit = 
+  for i = 1 to (Array.length a - 1) do 
+    if not (cmp a.(i - 1) a.(i)) then 
+      a.(i) <- a.(i - 1)
   done
 
 (*
@@ -20,7 +19,7 @@ let monotonize cmp a =
  * contained the smallest element in a according to cmp now contain the biggest element
  * originally in a according to cmp, and vice versa. 
  *)
-let swapBigSmall (cmp: 'a -> 'a -> bool) (a: 'a array): unit = 
+let swapBigSmall (cmp: 'a -> 'a -> bool) (a: 'a array) : unit = 
   if Array.length a > 0 then
     let min = Array.fold_left (fun acc x -> if cmp x acc then x else acc) a.(0) a in
     let max = Array.fold_left (fun acc x -> if cmp acc x then x else acc) a.(0) a in
@@ -61,7 +60,7 @@ let rec mergesort cmp a low high =
  * REQUIRES: cmp x y |-*-> true if x <= y in some ordering and cmp x y |-*-> false otherwise
  * ENSURES: sort cmp a mutates a to be ascendingly sorted according to cmp 
  *)
-let sort cmp a = 
+let sort (cmp: 'a -> 'a -> bool) (a: 'a array) : unit = 
   let n = Array.length a in
   mergesort cmp a 0 (n - 1)
 
