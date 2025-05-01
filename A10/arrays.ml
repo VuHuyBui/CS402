@@ -1,3 +1,5 @@
+(* James Bui *)
+
 (* 
  * monotonize : ( 'a -> 'a -> bool ) -> 'a array -> unit
  * REQUIRES: cmp x y |-*-> true if x <= y in some ordering and cmp x y |-*-> false otherwise
