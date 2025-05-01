@@ -19,15 +19,15 @@
  * contained the smallest element in a according to cmp now contain the biggest element
  * originally in a according to cmp, and vice versa. 
  *)
-let swapBigSmall (cmp: 'a -> 'a -> bool) (a: 'a array) : unit = 
+ let swapBigSmall (cmp: 'a -> 'a -> bool) (a: 'a array) : unit = 
   if Array.length a > 0 then
     let min = Array.fold_left (fun acc x -> if cmp x acc then x else acc) a.(0) a in
     let max = Array.fold_left (fun acc x -> if cmp acc x then x else acc) a.(0) a in
-    Array.map_inplace (fun x ->
-      if x = max then min
-      else if x = min then max
-      else x
-    ) a
+    for i = 0 to Array.length a - 1 do
+      if cmp a.(i) max && cmp max a.(i) then a.(i) <- min
+      else if cmp a.(i) min && cmp min a.(i) then a.(i) <- max
+      else ()
+    done
 
 
 let merge cmp a l m r = 
@@ -45,7 +45,6 @@ let merge cmp a l m r =
       l1 := !l1 + 1;
       mid := !mid + 1;
       l2 := !l2 + 1;
-
     done
 
 let rec mergesort cmp a low high = 
