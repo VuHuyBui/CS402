@@ -7,7 +7,7 @@
 let monotonize cmp a = 
   let n = Array.length a in
   for i = 0 to n - 2 do 
-    if cmp a.(i) a.(i + 1) = false
+    if not (cmp a.(i) a.(i + 1))
       then a.(i + 1) <- a.(i)
   done;;
 
