@@ -9,7 +9,7 @@ let monotonize cmp a =
   for i = 0 to n - 2 do 
     if not (cmp a.(i) a.(i + 1))
       then a.(i + 1) <- a.(i)
-  done;;
+  done
 
 (*
  * swapBigSmall : ( 'a -> 'a -> bool ) -> 'a array -> unit
